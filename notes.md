@@ -35,3 +35,8 @@ It prints a message saying which port number is closed
 
 ### Is there any part you genuinely don't understand — write the exact line
 Lines 23 to 27
+
+## Interesting finding
+Port 80 and port 21 came back open on my scan.
+Port 80 = web server running
+Port 21 = FTP enabled — insecure protocol, sends data in plain text
