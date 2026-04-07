@@ -19,3 +19,4 @@ usage: portScanner.py [-h] target start_port end_port
 portScanner.py: error: the following arguments are required: target, start_port, end_port
 
 ## Time spent
+20 mins
