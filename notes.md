@@ -19,6 +19,7 @@ usage: portScanner.py [-h] target start_port end_port
 portScanner.py: error: the following arguments are required: target, start_port, end_port
 
 ## Time spent
+<<<<<<< HEAD
 20min
 
 What does the code do in plain English — one sentence
@@ -35,3 +36,6 @@ It prints a message saying which port number is closed
 
 Is there any part you genuinely don't understand — write the exact line
 Lines 23 to 27
+=======
+20 mins
+>>>>>>> 9bda4a2528a98a68577726e091732eafcc389cea
