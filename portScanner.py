@@ -1,6 +1,12 @@
 import socket
 import argparse
-
+services = {
+                21: "FTP",
+                22: "SSH",
+                80: "HTTP",
+                443: "HTTPS",
+                3306: "MySQL"
+            }
 def scan_port(target, port):
     """Scans a specific port on the target machine."""
     try:
@@ -13,7 +19,9 @@ def scan_port(target, port):
 
         # Check if the port is open
         if result == 0:
-            print(f"[+] Port {port} is OPEN")
+            service = services.get(port, "Unknown")
+            print(f"[+] Port {port} is OPEN - {service}")
+            
         else:
             print(f"[-] Port {port} is CLOSED")
         s.close()
@@ -26,12 +34,15 @@ def scan_ports(target, start_port, end_port):
     for port in range(start_port, end_port + 1):
         scan_port(target, port)
 
+
+
 def main():
     parser = argparse.ArgumentParser(description="Python Port Scanner")
     parser.add_argument("target", help="Target IP or domain")
     parser.add_argument("start_port", type=int, help="Start port")
     parser.add_argument("end_port", type=int, help="End port")
     args = parser.parse_args()
+    
 
     scan_ports(args.target, args.start_port, args.end_port)
 
