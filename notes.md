@@ -42,3 +42,22 @@ Lines 23 to 27
 Port 80 and port 21 came back open on my scan.
 Port 80 = web server running
 Port 21 = FTP enabled — insecure protocol, sends data in plain text
+
+## What I worked on
+Added a service detector — open ports now show the service name
+
+## What I understood
+- How a dictionary works in Python
+- How .get() looks up a value with a fallback
+- Where in the code the open port message gets printed
+
+## What confused me
+I put the dictionary in two places at first — learned it only needs to be in one place at the top
+
+## What I added
+Service detection — port 80 now shows HTTP, port 21 shows FTP etc
+
+## What I want to figure out next
+Add a timeout and measure total scan time
+
+## Time spent 3hrs
