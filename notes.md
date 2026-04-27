@@ -1,4 +1,4 @@
-# Week 01 — Port Scanner
+# Week 01 — Port Scanner Basics
 
 ## What I worked on
 Found a tutorial I can look at to learn how port scanners work.
@@ -61,3 +61,16 @@ Service detection — port 80 now shows HTTP, port 21 shows FTP etc
 Add a timeout and measure total scan time
 
 ## Time spent 3hrs
+
+## Week 2 – Multithreading
+## What I worked on
+I added Multithreading to the code to speed up the process.
+
+## What I understood
+Multithreading is faster than sequential scanning
+
+## What confused me
+How to implement it in the code
+
+## What I want to figure out next
+Add scan types
