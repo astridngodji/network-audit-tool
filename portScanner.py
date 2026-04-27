@@ -1,5 +1,8 @@
 import socket
 import argparse
+from concurrent.futures import ThreadPoolExecutor
+
+
 services = {
                 21: "FTP",
                 22: "SSH",
@@ -7,6 +10,7 @@ services = {
                 443: "HTTPS",
                 3306: "MySQL"
             }
+
 def scan_port(target, port):
     """Scans a specific port on the target machine."""
     try:
@@ -22,19 +26,16 @@ def scan_port(target, port):
             service = services.get(port, "Unknown")
             print(f"[+] Port {port} is OPEN - {service}")
             
-        else:
-            print(f"[-] Port {port} is CLOSED")
-        s.close()
     except socket.error:
         print("[!] Unable to connect to the target.")
 
 def scan_ports(target, start_port, end_port):
     """Scans a range of ports on the target machine."""
     print(f"\n[Scanning {target} from port {start_port} to {end_port}]\n")
-    for port in range(start_port, end_port + 1):
-        scan_port(target, port)
 
-
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        for port in range(start_port, end_port + 1):
+            executor.submit(scan_port, target, port)
 
 def main():
     parser = argparse.ArgumentParser(description="Python Port Scanner")
