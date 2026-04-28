@@ -1,5 +1,6 @@
 import socket
 import argparse
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 
@@ -15,27 +16,28 @@ def scan_port(target, port):
     """Scans a specific port on the target machine."""
     try:
         # Create a socket object
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)#(uses IPv4, uses TGP connection)
-        s.settimeout(1)  # Set timeout for faster scanning
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:#(uses IPv4, uses TGP connection)
+            s.settimeout(1)  # Set timeout for faster scanning
 
         # Try connecting to the port
-        result = s.connect_ex((target, port))#( Returns 0 if open, an error code if closed.)
-
-        # Check if the port is open
-        if result == 0:
+        if s.connect_ex((target, port)) ==0:
             service = services.get(port, "Unknown")
             print(f"[+] Port {port} is OPEN - {service}")
-            
-    except socket.error:
-        print("[!] Unable to connect to the target.")
 
+    except socket.error:
+        pass
+    
 def scan_ports(target, start_port, end_port):
     """Scans a range of ports on the target machine."""
     print(f"\n[Scanning {target} from port {start_port} to {end_port}]\n")
 
+    rate = 50 # scans per sec
+    delay = 1 / rate
+    
     with ThreadPoolExecutor(max_workers=100) as executor:
         for port in range(start_port, end_port + 1):
             executor.submit(scan_port, target, port)
+            time.sleep(delay) # rate limiting
 
 def main():
     parser = argparse.ArgumentParser(description="Python Port Scanner")
