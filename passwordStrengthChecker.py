@@ -21,13 +21,6 @@ def checkSpecialChar(password):
     if not any(char in special_chars for char in password):
         return "At least one Special Character"
 
-
-for check in [checkLength, checkUppercase, checkNumber, checkSpecialChar]:
-    result = check(password)
-    if result:
-        print(result)
-
-
 def main():
     parser = argparse.ArgumentParser(description="Python Password Strength Checker")
     parser.add_argument("password", help="Type a password")
@@ -39,7 +32,7 @@ def main():
     for check in [checkLength, checkUppercase, checkNumber, checkSpecialChar]:
         result = check(password)
         if result:
-            errors,append(result)
+            errors.append(result)
     if errors:
         print("Password is weak:")
         for err in errors:
